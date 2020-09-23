@@ -15,7 +15,7 @@ our %SPEC;
 
 $SPEC{':package'} = {
     v => 1.1,
-    summary => 'Calculate resized dimensions of image/video',
+    summary => 'Calculate dimensions of image/video resized by ImageMagick-like geometry specification',
 };
 
 $SPEC{calc_image_resized_size} = {
