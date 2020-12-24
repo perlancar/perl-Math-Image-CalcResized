@@ -284,6 +284,9 @@ _
         {args=>{size=>"2592x1944", resize=>"^1024<"}, naked_result=>"2592x1944"},
         {args=>{size=>"2592x1944", resize=>"^10240<"}, naked_result=>"10240x7680"},
     ],
+    links => [
+        {url=>'prog:imgsize'},
+    ],
 };
 sub calc_image_resized_size {
     _calc_or_human('calc', @_);
