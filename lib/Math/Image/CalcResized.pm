@@ -1,15 +1,16 @@
 package Math::Image::CalcResized;
 
-# AUTHORITY
-# DATE
-# DIST
-# VERSION
-
 use 5.010001;
 use strict;
 use warnings;
 
 use Exporter 'import';
+
+# AUTHORITY
+# DATE
+# DIST
+# VERSION
+
 our @EXPORT_OK = qw(calc_image_resized_size);
 our %SPEC;
 
@@ -295,6 +296,13 @@ sub calc_image_resized_size {
 $SPEC{image_resize_notation_to_human} = {
     v => 1.1,
     summary => 'Translate ImageMagick-like resize notation (e.g. "720^>") to human-friendly text (e.g. "shrink shortest side to 720px")',
+    description => <<'_',
+
+Resize notation supports most syntax from ImageMagick geometry. See
+<pm:Math::Image::CalcResized> and ImageMagick documentation on geometry for more
+details.
+
+_
     args => {
         resize => {
             schema => 'str*',
