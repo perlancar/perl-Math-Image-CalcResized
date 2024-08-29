@@ -229,61 +229,57 @@ _
         },
     },
     examples => [
-        {args=>{size=>"2592x1944", resize=>""}, naked_result=>"2592x1944"},
+        {args=>{size=>"2592x1944", resize=>""}, naked_result=>"2592x1944", summary=>"no resizing"},
 
-        {args=>{size=>"2592x1944", resize=>"20%"}, naked_result=>"518x388"},
+        {args=>{size=>"2592x1944", resize=>"20%"}, naked_result=>"518x388", summary=>"scale (down) to 20%"},
 
-        {args=>{size=>"2592x1944", resize=>"20%x40%"}, naked_result=>"518x777"},
-        {args=>{size=>"2592x1944", resize=>"20x40%"}, naked_result=>"518x777"},
+        {args=>{size=>"2592x1944", resize=>"20%x40%"}, naked_result=>"518x777", summary=>"scale (down) width to 20% but height to 40%"},
+        {args=>{size=>"2592x1944", resize=>"20x40%"}, naked_result=>"518x777", summary=>"scale (down) width to 20% but height to 40% (first percent sign is optional)"},
 
-        {args=>{size=>"2592x1944", resize=>"1024"}, naked_result=>"1024x768"},
+        {args=>{size=>"2592x1944", resize=>"1024"}, naked_result=>"1024x768", summary=>"set width to 1024px"},
 
-        {args=>{size=>"2592x1944", resize=>"1024>"}, naked_result=>"1024x768"},
-        {args=>{size=>"2592x1944", resize=>"10240>"}, naked_result=>"2592x1944"},
+        {args=>{size=>"2592x1944", resize=>"1024>"}, naked_result=>"1024x768", summary=>"shrink width to 1024px"},
+        {args=>{size=>"2592x1944", resize=>"10240>"}, naked_result=>"2592x1944", summary=>"shrink width to 10240px (no effect since width is already less than 10240px)"},
 
-        {args=>{size=>"2592x1944", resize=>"1024^"}, naked_result=>"2592x1944"},
-        {args=>{size=>"2592x1944", resize=>"10240^"}, naked_result=>"10240x7680"},
+        {args=>{size=>"2592x1944", resize=>"1024^"}, naked_result=>"2592x1944", summary=>"enlarge width to 1024px (no effect since width is already greater than 1024px"},
+        {args=>{size=>"2592x1944", resize=>"10240^"}, naked_result=>"10240x7680", summary=>"enlarge width to 10240px"},
 
-        {args=>{size=>"2592x1944", resize=>"x1024"}, naked_result=>"1365x1024"},
+        {args=>{size=>"2592x1944", resize=>"x1024"}, naked_result=>"1365x1024", summary=>"set height to 1024px"},
 
-        {args=>{size=>"2592x1944", resize=>"x768>"}, naked_result=>"1024x768"},
-        {args=>{size=>"2592x1944", resize=>"x7680>"}, naked_result=>"2592x1944"},
+        {args=>{size=>"2592x1944", resize=>"x768>"}, naked_result=>"1024x768", summary=>"shrink height to 768px"},
+        {args=>{size=>"2592x1944", resize=>"x7680>"}, naked_result=>"2592x1944", summary=>"shrink height to 7680px (no effect since height is already less than 7680px)"},
 
-        {args=>{size=>"2592x1944", resize=>"x768^"}, naked_result=>"2592x1944"},
-        {args=>{size=>"2592x1944", resize=>"x7680^"}, naked_result=>"10240x7680"},
+        {args=>{size=>"2592x1944", resize=>"x768^"}, naked_result=>"2592x1944", summary=>"enlarge height to 768px (no effect since height is already greater than 768px)"},
+        {args=>{size=>"2592x1944", resize=>"x7680^"}, naked_result=>"10240x7680", summary=>"enlarge height to 7680px"},
 
-        {args=>{size=>"2592x1944", resize=>"20000x10000"}, naked_result=>"2592x1944"},
-        {args=>{size=>"2592x1944", resize=>"20000x1000"}, naked_result=>"1333x1000"},
-        {args=>{size=>"2592x1944", resize=>"100x200"}, naked_result=>"100x75"},
-        {args=>{size=>"2592x1944", resize=>"100x100"}, naked_result=>"100x75"},
+        {args=>{size=>"2592x1944", resize=>"20000x10000"}, naked_result=>"2592x1944", summary=>"fit image inside 20000x10000 (no effect since it already fits)"},
+        {args=>{size=>"2592x1944", resize=>"20000x1000"}, naked_result=>"1333x1000", summary=>"fit image inside 20000x1000 (height is reduced to 1000 to make the image fit)"},
+        {args=>{size=>"2592x1944", resize=>"100x200"}, naked_result=>"100x75", summary=>"fit image inside 100x200"},
+        {args=>{size=>"2592x1944", resize=>"100x100"}, naked_result=>"100x75", summary=>"fit image inside 100x100"},
 
-        {args=>{size=>"2592x1944", resize=>"10000x5000^"}, naked_result=>"10000x7500"},
-        {args=>{size=>"2592x1944", resize=>"5000x10000^"}, naked_result=>"13333x10000"},
-        {args=>{size=>"2592x1944", resize=>"100x100^"}, naked_result=>"2592x1944"},
+        {args=>{size=>"2592x1944", resize=>"10000x5000^"}, naked_result=>"10000x7500", summary=>"fit a 10000x5000 area inside image"},
+        {args=>{size=>"2592x1944", resize=>"5000x10000^"}, naked_result=>"13333x10000", summary=>"fit a 5000x10000 area inside image"},
+        {args=>{size=>"2592x1944", resize=>"100x100^"}, naked_result=>"2592x1944", summary=>"fit a 100x100 area inside image (no effect since the image can already fit that area)"},
 
-        {args=>{size=>"2592x1944", resize=>"100x100!"}, naked_result=>"100x100"},
+        {args=>{size=>"2592x1944", resize=>"100x100!"}, naked_result=>"100x100", summary=>"set dimension to 100x100"},
 
-        {args=>{size=>"2592x1944", resize=>"10000x5000>"}, naked_result=>"2592x1944"},
-        {args=>{size=>"2592x1944", resize=>"5000x10000>"}, naked_result=>"2592x1944"},
-        {args=>{size=>"2592x1944", resize=>"3000x1000>"}, naked_result=>"2592x1944"}, #?
-        {args=>{size=>"2592x1944", resize=>"2000x1000>"}, naked_result=>"1333x1000"},
-        {args=>{size=>"2592x1944", resize=>"100x100>"}, naked_result=>"100x75"},
+        {args=>{size=>"2592x1944", resize=>"10000x5000>"}, naked_result=>"2592x1944", summary=>"shrink image to fit inside 10000x5000px (no effect since image already fits)"},
+        {args=>{size=>"2592x1944", resize=>"2000x1000>"}, naked_result=>"1333x1000", summary=>"shrink image to fit inside 2000x1000px"},
+        {args=>{size=>"2592x1944", resize=>"100x100>"}, naked_result=>"100x75", summary=>"shrink image to fit inside 100x100px"},
 
-        {args=>{size=>"2592x1944", resize=>"10000x5000<"}, naked_result=>"10000x7500"},
-        {args=>{size=>"2592x1944", resize=>"5000x10000<"}, naked_result=>"13333x10000"},
-        {args=>{size=>"2592x1944", resize=>"3000x1000<"}, naked_result=>"2592x1944"}, #?
-        {args=>{size=>"2592x1944", resize=>"2000x1000<"}, naked_result=>"2592x1944"},
-        {args=>{size=>"2592x1944", resize=>"100x100<"}, naked_result=>"2592x1944"},
+        {args=>{size=>"2592x1944", resize=>"10000x5000<"}, naked_result=>"10000x7500", summary=>"enlarge image to fit 10000x5000px inside it"},
+        {args=>{size=>"2592x1944", resize=>"5000x10000<"}, naked_result=>"13333x10000", summary=>"enlarge image to fit 5000x10000px inside it"},
+        {args=>{size=>"2592x1944", resize=>"3000x1000<"}, naked_result=>"2592x1944", summary=>"enlarge image to fit 3000x1000px inside it (no effect since image already fits)"},
 
-        {args=>{size=>"2592x1944", resize=>"1024^>"}, naked_result=>"1365x1024"},
-        {args=>{size=>"2592x1944", resize=>"10240^>"}, naked_result=>"2592x1944"},
-        {args=>{size=>"2592x1944", resize=>"1024^<"}, naked_result=>"2592x1944"},
-        {args=>{size=>"2592x1944", resize=>"10240^<"}, naked_result=>"13653x10240"},
+        {args=>{size=>"2592x1944", resize=>"1024^>"}, naked_result=>"1365x1024", summary=>"shrink shortest side to 1024px"},
+        {args=>{size=>"2592x1944", resize=>"10240^>"}, naked_result=>"2592x1944", summary=>"shrink shortest side to 10240px (no effect since shortest side 1944px is already less than 10240px)"},
+        {args=>{size=>"2592x1944", resize=>"1024^<"}, naked_result=>"2592x1944", summary=>"enlarge shortest side to 1024px (no effect since shortest side is already greater than 1024px)"},
+        {args=>{size=>"2592x1944", resize=>"10240^<"}, naked_result=>"13653x10240", summary=>"enlarge shortest side to 10240px"},
 
-        {args=>{size=>"2592x1944", resize=>"^1024>"}, naked_result=>"1024x768"},
-        {args=>{size=>"2592x1944", resize=>"^10240>"}, naked_result=>"2592x1944"},
-        {args=>{size=>"2592x1944", resize=>"^1024<"}, naked_result=>"2592x1944"},
-        {args=>{size=>"2592x1944", resize=>"^10240<"}, naked_result=>"10240x7680"},
+        {args=>{size=>"2592x1944", resize=>"^1024>"}, naked_result=>"1024x768", summary=>"shrink longest side to 1024px"},
+        {args=>{size=>"2592x1944", resize=>"^10240>"}, naked_result=>"2592x1944", summary=>"shrink longest side to 10240px (no effect since longest side 2592px is already less than 10240px)"},
+        {args=>{size=>"2592x1944", resize=>"^1024<"}, naked_result=>"2592x1944", summary=>"enlarge longest side to 1024px (no effect since longest side 2592px is already greater than 1024px)"},
+        {args=>{size=>"2592x1944", resize=>"^10240<"}, naked_result=>"10240x7680", summary=>"enlarge longest side to 10240px"},
     ],
     links => [
         {url=>'prog:imgsize'},
